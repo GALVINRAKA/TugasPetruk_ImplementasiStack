@@ -88,3 +88,45 @@ postfix.push_back(ops.top());
 return postfix;
 }
 
+//dikerjakan oleh Bayu Ardi Ramadhani
+
+float evaluatePostfix(const vector<string>&postfix){
+  stack<float> values;
+  for(const string& token : postfix){
+    if(isdigit(token[0]) || token [0] =='.' || token.size() > 1 && (isdigit(token[1]) || token[1] == '.'))){
+        values.push(stof(token));
+    }else id (isOperator(token[0])) {
+      float b = values.top(); values.pop();
+      float a = values.top(); values.pop();
+      float result = 0;
+
+      switch (token[0]){
+        case '+' result = a+b;
+  break;
+        case '-' result = a-b;
+  break;
+        case '*' result = a*b;
+  break;
+        case '/' result = a/b;
+  break;
+        case '%" result = fmod(a,b); break;
+    }
+    values.push(result); 
+  }
+  return values.top();
+}
+
+int main() {
+  string infix;
+  getline(cin, infix);
+
+  vector<string> postfix = infixToPostfix(infixElemets);
+  cout<< "Postfix: ";
+  printInfix(postfix);
+
+  float result = evaluatePostfix(postfix);
+ cout<< "Result:" << result << endl;
+return 0;
+}
+
+
